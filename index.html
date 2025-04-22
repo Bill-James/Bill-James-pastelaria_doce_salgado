@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pastelaria Online</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: url('https://www.trades-sa.com/wp-content/uploads/2023/04/nuevos_toppings.png') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 20px;
+      color: #fff;
+      top: 30%;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+      color: #ffeedd;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    }
+
+    p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+    }
+
+    a.button {
+      display: inline-block;
+      padding: 15px 30px;
+      background-color: #c94f4f;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 1em;
+      transition: background-color 0.2s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+
+    a.button:hover {
+      background-color: #a83c3c;
+    }
+
+    .float-btn {
+      position: fixed;
+      padding: 10px 15px;
+      border-radius: 25px;
+      font-size: 14px;
+      font-weight: bold;
+      text-decoration: none;
+      color: white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      z-index: 3;
+    }
+
+    .whatsapp {
+      bottom: 20px;
+      right: 20px;
+      background-color: #25d366;
+    }
+
+    .projeto {
+      bottom: 20px;
+      left: 20px;
+      background-color: #444;
+    }
+
+    .corner-title {
+      position: fixed;
+      font-size: 2em;
+      font-family: 'Pacifico', cursive;
+      color: #ffeedd;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+      z-index: 3;
+    }
+
+    .top-left { top: 10px; left: 20px; }
+    .top-center { top: 10px; left: 50%; transform: translateX(-50%); }
+    .top-right { top: 10px; right: 20px; }
+
+    #projeto-info {
+      display: none;
+      position: fixed;
+      bottom: 70px;
+      left: 20px;
+      background-color: rgba(0,0,0,0.85);
+      color: white;
+      padding: 20px;
+      max-width: 300px;
+      border-radius: 10px;
+      z-index: 4;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+
+  <!-- Títulos -->
+  <div class="corner-title top-left">H</div>
+  <div class="corner-title top-center">P</div>
+  <div class="corner-title top-right">L</div>
+
+  <div class="container">
+    <h1>Pastelaria Online</h1>
+    <p>Descubra nossos deliciosos pastéis, salgados e bolos artesanais. Faça seus pedidos de forma rápida e prática!</p>
+    <a href="Pastelaria.html" class="button">Fazer um Pedido</a>
+  </div>
+
+  <!-- Botões Fixos -->
+  <a href="https://wa.me/244923881741" class="float-btn whatsapp" target="_blank">Conversar no WhatsApp</a>
+  <a href="#" class="float-btn projeto" onclick="toggleProjeto()">Apresentação do Projeto</a>
+
+  <!-- Info Projeto -->
+  <div id="projeto-info">
+    <strong>Apresentação do Projeto de Comércio Eletrônico</strong><br><br>
+    <strong>Pastelaria Online – Sistema de Encomendas Web</strong><br><br>
+    <strong>Integrantes do Grupo:</strong><br>
+    Henrique Jaime – 210957<br>
+    Pedro Kulazi – 210385<br>
+    Leiria Mandinga – 211312<br><br>
+    <strong>Objetivo:</strong><br>
+    Desenvolver uma solução simples e funcional de comércio eletrônico para uma pastelaria.<br><br>
+    <strong>Funcionalidades:</strong><br>
+    - Fazer um pedido para encomenda<br>
+    - Campo para mensagem adicional<br>
+    - Integração com o WhatsApp<br><br>
+    <strong>Tecnologias:</strong><br>
+    HTML e links personalizados
+  </div>
+
+  <script>
+    function toggleProjeto() {
+      const info = document.getElementById('projeto-info');
+      info.style.display = info.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
+</body>
+</html>

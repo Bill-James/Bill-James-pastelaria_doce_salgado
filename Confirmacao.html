@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Confirmação de Encomenda</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff8f0;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .produto-img {
+      width: 150px;
+      border-radius: 8px;
+      margin: 10px;
+    }
+
+    .pedido {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Pedido Confirmado!</h1>
+  <div id="resumo"></div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const nome = params.get("nome");
+    const produtos = params.getAll("produto[]");
+    const quantidade = params.get("quantidade");
+    const mensagem = params.get("mensagem");
+
+    const imagens = {
+      pastel: "https://diariodonordeste.verdesmares.com.br/image/contentid/policy:1.3319443:1672692668/Massa-de-pastel.jpg?f=default&$p$f=787ad8d",
+      bolo: "https://d1uz88p17r663j.cloudfront.net/original/8fee36bf950557ff9f896b9104f36907_bolo-vulcao-brigadeiro-receitas-nestle.jpg",
+      torta: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7qkxzJzJc3MGRbEnRUbGbAvwwD_Jo-ozvclk2GP7rvQ&s&ec=72940545",
+      doces: "https://www.chefpanda.pt/wp-content/uploads/2019/05/Sortido-doce-e-salgado.jpg"
+    };
+
+    const resumo = document.getElementById("resumo");
+    resumo.innerHTML = `
+      <p><strong>Nome:</strong> ${nome}</p>
+      <p><strong>Quantidade:</strong> ${quantidade}</p>
+      <p><strong>Mensagem:</strong> ${mensagem || "Nenhuma"}</p>
+      <h3>Produtos escolhidos:</h3>
+      <div class="pedido">
+        ${produtos.map(prod => `
+          <div>
+            <img class="produto-img" src="${imagens[prod]}" alt="${prod}">
+            <p>${prod.charAt(0).toUpperCase() + prod.slice(1)}</p>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  </script>
+  
+  <p>Sua encomenda será entregue no prazo de <strong>3 dias</strong>.</p>
+  
+  <!-- Botão de WhatsApp -->
+  <a href="https://wa.me/244923881741" target="_blank">
+    <button>Falar com a Pastelaria no WhatsApp</button>
+  </a>
+
+  
+  <!-- Botão para voltar -->
+  <button onclick="voltarParaInicio()">OK</button>
+  
+  <script>
+    function voltarParaInicio() {
+      window.open('Pastelaria.html', '_self');
+    }
+  </script>
+</body>
+</html>
