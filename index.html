@@ -1,163 +1,136 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pastelaria Online</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background: url('https://www.trades-sa.com/wp-content/uploads/2023/04/nuevos_toppings.png') no-repeat center center fixed;
-      background-size: cover;
-    }
-
-    .overlay {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.6);
-      z-index: 0;
-    }
-
-    .container {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 20px;
-      color: #fff;
-      top: 30%;
-    }
-
-    h1 {
-      font-size: 3em;
-      margin-bottom: 10px;
-      color: #ffeedd;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-    }
-
-    p {
-      font-size: 1.2em;
-      margin-bottom: 20px;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
-    }
-
-    a.button {
-      display: inline-block;
-      padding: 15px 30px;
-      background-color: #c94f4f;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 5px;
-      font-size: 1em;
-      transition: background-color 0.2s;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    }
-
-    a.button:hover {
-      background-color: #a83c3c;
-    }
-
-    .float-btn {
-      position: fixed;
-      padding: 10px 15px;
-      border-radius: 25px;
-      font-size: 14px;
-      font-weight: bold;
-      text-decoration: none;
+      bottom: 90px;
+      left: 30px;
+      background: rgba(0,0,0,0.9);
       color: white;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      z-index: 3;
-    }
-
-    .whatsapp {
-      bottom: 20px;
-      right: 20px;
-      background-color: #25d366;
-    }
-
-    .projeto {
-      bottom: 20px;
-      left: 20px;
-      background-color: #444;
-    }
-
-    .corner-title {
-      position: fixed;
-      font-size: 2em;
-      font-family: 'Pacifico', cursive;
-      color: #ffeedd;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
-      z-index: 3;
-    }
-
-    .top-left { top: 10px; left: 20px; }
-    .top-center { top: 10px; left: 50%; transform: translateX(-50%); }
-    .top-right { top: 10px; right: 20px; }
-
-    #projeto-info {
-      display: none;
-      position: fixed;
-      bottom: 70px;
-      left: 20px;
-      background-color: rgba(0,0,0,0.85);
-      color: white;
-      padding: 20px;
-      max-width: 300px;
-      border-radius: 10px;
-      z-index: 4;
+      padding: 25px;
+      max-width: 350px;
+      border-radius: 15px;
+      z-index: 20;
       font-size: 0.9em;
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .price-highlight {
+      display: inline-block;
+      background: linear-gradient(45deg, #00b894, #00cec9);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      margin: 10px 5px;
+      box-shadow: 0 4px 15px rgba(0,184,148,0.3);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2.5em; }
+      .hero-subtitle { font-size: 1.1em; }
+      .corner-title { font-size: 1.8em; }
+      .features-grid { grid-template-columns: 1fr; }
+      .hero-content { margin: 20px; padding: 30px 20px; }
     }
   </style>
 </head>
 <body>
-  <div class="overlay"></div>
+  <!-- Títulos dos cantos -->
+  <div class="corner-title top-left">Henrique Hub </div>
+  <div class="corner-title top-center"></div>
+  <div class="corner-title top-right">Fast Delivery</div>
 
-  <!-- Títulos -->
-  <div class="corner-title top-left">H</div>
-  <div class="corner-title top-center">N</div>
-  <div class="corner-title top-right">L</div>
+  <div class="hero-section">
+    <!-- Pastéis flutuantes -->
+    <div class="floating-pastries">
+      <div class="pastry"></div>
+      <div class="pastry"></div>
+      <div class="pastry"></div>
+      <div class="pastry"></div>
+      <div class="pastry"></div>
+    </div>
 
-  <div class="container">
-    <h1>Pastelaria Online</h1>
-    <p>Descubra nossos deliciosos pastéis, salgados e bolos artesanais. Faça seus pedidos de forma rápida e prática!</p>
-    <a href="Pastelaria.html" class="button">Fazer um Pedido</a>
+    <div class="hero-content">
+      <h1 class="hero-title">Pastelaria Doce e Salgado</h1>
+      <p class="hero-subtitle">
+        🥧 Sabores únicos em cada mordida! 🥧<br>
+        Descubra nossos deliciosos Brownies, salgados frescos e bolos irresistíveis.
+      </p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <span class="feature-icon">🥟</span>
+          <div class="feature-title">Pastéis Artesanais</div>
+          <div class="feature-desc">Massa crocante e recheios generosos feitos na hora</div>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">💰</span>
+          <div class="feature-title">Preços Acessíveis</div>
+          <div class="feature-desc">Qualidade premium sem pesar no bolso</div>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🚀</span>
+          <div class="feature-title">Entrega Rápida</div>
+          <div class="feature-desc">Pedidos prontos em minutos, sempre quentinhos</div>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">⭐</span>
+          <div class="feature-title">5 Estrelas</div>
+          <div class="feature-desc">Avaliação máxima dos nossos clientes satisfeitos</div>
+        </div>
+      </div>
+
+      <div style="margin: 20px 0;">
+        <span class="price-highlight">A partir de 150 Kz</span>
+        <span class="price-highlight">Combos especiais</span>
+        <span class="price-highlight">Promoções diárias</span>
+      </div>
+
+      <a href="Pastelaria.html" class="cta-button">🛒 Fazer Pedido Agora!</a>
+    </div>
   </div>
 
-  <!-- Botões Fixos -->
-  <a href="https://wa.me/244923881741" class="float-btn whatsapp" target="_blank">Conversar no WhatsApp</a>
-  <a href="#" class="float-btn projeto" onclick="toggleProjeto()">Apresentação do Projeto</a>
+  <!-- Botões flutuantes -->
+  <a href="https://wa.me/244923881741" class="float-btn whatsapp" target="_blank">
+    💬 WhatsApp
+  </a>
+  <a href="#" class="float-btn projeto" onclick="toggleProjeto()">
+    📋 Sobre o Projeto
+  </a>
 
-  <!-- Info Projeto -->
-  <div id="projeto-info">
-    <strong>Apresentação do Projeto de Comércio Eletrônico</strong><br><br>
-    <strong>Pastelaria Online – Sistema de Encomendas Web</strong><br><br>
-    <strong>Integrantes do Grupo:</strong><br>
-    Henrique Jaime – 210957<br>
-    Narciso Fonseca - 211749<br>
-    Leiria Mandinga – 211312<br><br>
-    <strong>Objetivo:</strong><br>
-    Desenvolver uma solução simples e funcional de comércio eletrônico para uma pastelaria.<br><br>
-    <strong>Funcionalidades:</strong><br>
-    - Fazer um pedido para encomenda<br>
-    - Campo para mensagem adicional<br>
-    - Integração com o WhatsApp<br><br>
-    <strong>Tecnologias:</strong><br>
-    HTML e links personalizados
-  </div>
+ 
+    
 
   <script>
     function toggleProjeto() {
       const info = document.getElementById('projeto-info');
       info.style.display = info.style.display === 'block' ? 'none' : 'block';
     }
+
+    // Adicionar mais animações aos elementos flutuantes
+    document.addEventListener('DOMContentLoaded', function() {
+      const pastries = document.querySelectorAll('.pastry');
+      pastries.forEach((pastry, index) => {
+        pastry.style.animationDuration = (4 + Math.random() * 4) + 's';
+        pastry.style.animationDelay = (Math.random() * 2) + 's';
+      });
+    });
+
+    // Efeito parallax sutil
+    window.addEventListener('scroll', function() {
+      const scrolled = window.pageYOffset;
+      const parallax = document.querySelector('.floating-pastries');
+      if (parallax) {
+        parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
+      }
+    });
   </script>
 </body>
 </html>
