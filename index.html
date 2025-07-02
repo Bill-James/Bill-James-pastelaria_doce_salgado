@@ -3,161 +3,393 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pastelaria Online</title>
+  <title>Pastelaria Online - Sabores Únicos</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700&display=swap');
 
-    body {
+    * {
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
-      background: url('https://www.trades-sa.com/wp-content/uploads/2023/04/nuevos_toppings.png') no-repeat center center fixed;
-      background-size: cover;
+      box-sizing: border-box;
     }
 
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
+    body {
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
+
+    .hero-section {
+      position: relative;
+      min-height: 100vh;
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="pastry" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="30" fill="%23f4e4bc" opacity="0.1"/><circle cx="150" cy="150" r="25" fill="%23d4a574" opacity="0.1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23pastry)"/></svg>');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+    }
+
+    .floating-pastries {
+      position: absolute;
       width: 100%;
       height: 100%;
-      background-color: rgba(0,0,0,0.6);
-      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
     }
 
-    .container {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 20px;
-      color: #fff;
+    .pastry {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+      opacity: 0.8;
+    }
+
+    .pastry:nth-child(1) {
+      background: linear-gradient(45deg, #f4e4bc, #d4a574);
+      top: 20%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .pastry:nth-child(2) {
+      background: linear-gradient(45deg, #ff9a9e, #fecfef);
+      top: 60%;
+      left: 80%;
+      animation-delay: 2s;
+      width: 40px;
+      height: 40px;
+    }
+
+    .pastry:nth-child(3) {
+      background: linear-gradient(45deg, #a8edea, #fed6e3);
       top: 30%;
+      right: 15%;
+      animation-delay: 4s;
+      width: 50px;
+      height: 50px;
     }
 
-    h1 {
-      font-size: 3em;
-      margin-bottom: 10px;
-      color: #ffeedd;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    .pastry:nth-child(4) {
+      background: linear-gradient(45deg, #ffeaa7, #fab1a0);
+      bottom: 20%;
+      left: 20%;
+      animation-delay: 1s;
     }
 
-    p {
-      font-size: 1.2em;
-      margin-bottom: 20px;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+    .pastry:nth-child(5) {
+      background: linear-gradient(45deg, #74b9ff, #0984e3);
+      top: 10%;
+      left: 60%;
+      animation-delay: 3s;
+      width: 35px;
+      height: 35px;
     }
 
-    a.button {
-      display: inline-block;
-      padding: 15px 30px;
-      background-color: #c94f4f;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 5px;
-      font-size: 1em;
-      transition: background-color 0.2s;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    }
-
-    a.button:hover {
-      background-color: #a83c3c;
-    }
-
-    .float-btn {
-      position: fixed;
-      padding: 10px 15px;
-      border-radius: 25px;
-      font-size: 14px;
-      font-weight: bold;
-      text-decoration: none;
-      color: white;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      z-index: 3;
-    }
-
-    .whatsapp {
-      bottom: 20px;
-      right: 20px;
-      background-color: #25d366;
-    }
-
-    .projeto {
-      bottom: 20px;
-      left: 20px;
-      background-color: #444;
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
     }
 
     .corner-title {
       position: fixed;
-      font-size: 2em;
+      font-size: 2.5em;
       font-family: 'Pacifico', cursive;
       color: #ffeedd;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
-      z-index: 3;
+      text-shadow: 3px 3px 8px rgba(0,0,0,0.8);
+      z-index: 10;
+      transition: all 0.3s ease;
     }
 
-    .top-left { top: 10px; left: 20px; }
-    .top-center { top: 10px; left: 50%; transform: translateX(-50%); }
-    .top-right { top: 10px; right: 20px; }
+    .corner-title:hover {
+      transform: scale(1.1);
+      color: #ffcc99;
+    }
+
+    .top-left { top: 20px; left: 30px; }
+    .top-center { top: 20px; left: 50%; transform: translateX(-50%); }
+    .top-right { top: 20px; right: 30px; }
+
+    .hero-content {
+      position: relative;
+      z-index: 5;
+      max-width: 800px;
+      padding: 40px 20px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+
+    .hero-title {
+      font-size: 4em;
+      font-family: 'Pacifico', cursive;
+      margin-bottom: 20px;
+      color: #ffeedd;
+      text-shadow: 3px 3px 8px rgba(0,0,0,0.8);
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 3px 3px 8px rgba(0,0,0,0.8), 0 0 20px rgba(255,238,221,0.3); }
+      to { text-shadow: 3px 3px 8px rgba(0,0,0,0.8), 0 0 30px rgba(255,238,221,0.6); }
+    }
+
+    .hero-subtitle {
+      font-size: 1.4em;
+      margin-bottom: 30px;
+      color: #f0f0f0;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+      line-height: 1.6;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .feature-card {
+      background: rgba(255,255,255,0.15);
+      padding: 20px;
+      border-radius: 15px;
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255,255,255,0.2);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    .feature-icon {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .feature-title {
+      font-size: 1.1em;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #ffeedd;
+    }
+
+    .feature-desc {
+      font-size: 0.9em;
+      color: #e0e0e0;
+      line-height: 1.4;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 18px 40px;
+      background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-size: 1.2em;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(255,107,107,0.4);
+      margin-top: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-button:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .cta-button:hover:before {
+      left: 100%;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(255,107,107,0.6);
+    }
+
+    .float-btn {
+      position: fixed;
+      padding: 15px 20px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      color: white;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      z-index: 15;
+      transition: all 0.3s ease;
+    }
+
+    .float-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    }
+
+    .whatsapp {
+      bottom: 30px;
+      right: 30px;
+      background: linear-gradient(45deg, #25d366, #128c7e);
+    }
+
+    .projeto {
+      bottom: 30px;
+      left: 30px;
+      background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+    }
 
     #projeto-info {
       display: none;
       position: fixed;
-      bottom: 70px;
-      left: 20px;
-      background-color: rgba(0,0,0,0.85);
+      bottom: 90px;
+      left: 30px;
+      background: rgba(0,0,0,0.9);
       color: white;
-      padding: 20px;
-      max-width: 300px;
-      border-radius: 10px;
-      z-index: 4;
+      padding: 25px;
+      max-width: 350px;
+      border-radius: 15px;
+      z-index: 20;
       font-size: 0.9em;
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .price-highlight {
+      display: inline-block;
+      background: linear-gradient(45deg, #00b894, #00cec9);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      margin: 10px 5px;
+      box-shadow: 0 4px 15px rgba(0,184,148,0.3);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2.5em; }
+      .hero-subtitle { font-size: 1.1em; }
+      .corner-title { font-size: 1.8em; }
+      .features-grid { grid-template-columns: 1fr; }
+      .hero-content { margin: 20px; padding: 30px 20px; }
     }
   </style>
 </head>
 <body>
-  <div class="overlay"></div>
+  <!-- Títulos dos cantos -->
+  <div class="corner-title top-left">Henrique Hub </div>
+  <div class="corner-title top-center"></div>
+  <div class="corner-title top-right">Fast Delivery</div>
 
-  <!-- Títulos -->
-  <div class="corner-title top-left">H</div>
-  <div class="corner-title top-center">N</div>
-  <div class="corner-title top-right">L</div>
+  <div class="hero-section">
+    <!-- Pastéis flutuantes -->
+    <div class="floating-pastries">
+      <div class="pastry"></div>
+      <div class="pastry"></div>
+      <div class="pastry"></div>
+      <div class="pastry"></div>
+      <div class="pastry"></div>
+    </div>
 
-  <div class="container">
-    <h1>Pastelaria Online</h1>
-    <p>Descubra nossos deliciosos pastéis, salgados e bolos artesanais. Faça seus pedidos de forma rápida e prática!</p>
-    <a href="Pastelaria.html" class="button">Fazer um Pedido</a>
+    <div class="hero-content">
+      <h1 class="hero-title">Pastelaria Doce e Salgado</h1>
+      <p class="hero-subtitle">
+        🥧 Sabores únicos em cada mordida! 🥧<br>
+        Descubra nossos deliciosos Brownies, salgados frescos e bolos irresistíveis.
+      </p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <span class="feature-icon">🥟</span>
+          <div class="feature-title">Pastéis Artesanais</div>
+          <div class="feature-desc">Massa crocante e recheios generosos feitos na hora</div>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">💰</span>
+          <div class="feature-title">Preços Acessíveis</div>
+          <div class="feature-desc">Qualidade premium sem pesar no bolso</div>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🚀</span>
+          <div class="feature-title">Entrega Rápida</div>
+          <div class="feature-desc">Pedidos prontos em minutos, sempre quentinhos</div>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">⭐</span>
+          <div class="feature-title">5 Estrelas</div>
+          <div class="feature-desc">Avaliação máxima dos nossos clientes satisfeitos</div>
+        </div>
+      </div>
+
+      <div style="margin: 20px 0;">
+        <span class="price-highlight">A partir de 150 Kz</span>
+        <span class="price-highlight">Combos especiais</span>
+        <span class="price-highlight">Promoções diárias</span>
+      </div>
+
+      <a href="Pastelaria.html" class="cta-button">🛒 Fazer Pedido Agora!</a>
+    </div>
   </div>
 
-  <!-- Botões Fixos -->
-  <a href="https://wa.me/244923881741" class="float-btn whatsapp" target="_blank">Conversar no WhatsApp</a>
-  <a href="#" class="float-btn projeto" onclick="toggleProjeto()">Apresentação do Projeto</a>
+  <!-- Botões flutuantes -->
+  <a href="https://wa.me/244923881741" class="float-btn whatsapp" target="_blank">
+    💬 WhatsApp
+  </a>
+  <a href="#" class="float-btn projeto" onclick="toggleProjeto()">
+    📋 Sobre o Projeto
+  </a>
 
-  <!-- Info Projeto -->
-  <div id="projeto-info">
-    <strong>Apresentação do Projeto de Comércio Eletrônico</strong><br><br>
-    <strong>Pastelaria Online – Sistema de Encomendas Web</strong><br><br>
-    <strong>Integrantes do Grupo:</strong><br>
-    Henrique Jaime – 210957<br>
-    Narciso Fonseca - 211749<br>
-    Leiria Mandinga – 211312<br><br>
-    <strong>Objetivo:</strong><br>
-    Desenvolver uma solução simples e funcional de comércio eletrônico para uma pastelaria.<br><br>
-    <strong>Funcionalidades:</strong><br>
-    - Fazer um pedido para encomenda<br>
-    - Campo para mensagem adicional<br>
-    - Integração com o WhatsApp<br><br>
-    <strong>Tecnologias:</strong><br>
-    HTML e links personalizados
-  </div>
+ 
+    
 
   <script>
     function toggleProjeto() {
       const info = document.getElementById('projeto-info');
       info.style.display = info.style.display === 'block' ? 'none' : 'block';
     }
+
+    // Adicionar mais animações aos elementos flutuantes
+    document.addEventListener('DOMContentLoaded', function() {
+      const pastries = document.querySelectorAll('.pastry');
+      pastries.forEach((pastry, index) => {
+        pastry.style.animationDuration = (4 + Math.random() * 4) + 's';
+        pastry.style.animationDelay = (Math.random() * 2) + 's';
+      });
+    });
+
+    // Efeito parallax sutil
+    window.addEventListener('scroll', function() {
+      const scrolled = window.pageYOffset;
+      const parallax = document.querySelector('.floating-pastries');
+      if (parallax) {
+        parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
+      }
+    });
   </script>
 </body>
 </html>
