@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Encomenda - Pastelaria Doce Sabor</title>
+  <title>Pastéis Salgados - Pastelaria Doce Sabor</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
@@ -41,6 +41,25 @@
       color: #ffeedd;
       font-family: 'Pacifico', cursive;
       text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+    }
+
+    .category-header {
+      background: rgba(255,255,255,0.15);
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .category-icon {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+
+    .category-description {
+      font-size: 1.1em;
+      color: #e0e0e0;
+      margin-bottom: 15px;
     }
 
     form {
@@ -95,7 +114,7 @@
 
     .produto {
       position: relative;
-      width: 120px;
+      width: 140px;
       margin: 10px;
       cursor: pointer;
       text-align: center;
@@ -107,21 +126,32 @@
 
     .produto img {
       width: 100%;
+      height: 120px;
+      object-fit: cover;
       border-radius: 8px;
       border: 3px solid transparent;
-      transition: border 0.3s;
+      transition: all 0.3s;
     }
 
     .produto span {
       display: block;
-      margin-top: 5px;
+      margin-top: 8px;
       font-weight: bold;
       font-size: 14px;
       color: #c94f4f;
+      line-height: 1.3;
+    }
+
+    .produto .descricao {
+      font-size: 11px;
+      color: #666;
+      font-weight: normal;
+      margin-top: 4px;
     }
 
     .produto input[type="checkbox"]:checked + img {
       border: 3px solid #c94f4f;
+      transform: scale(1.05);
     }
 
     .float-btn,
@@ -152,68 +182,110 @@
       margin-top: 10px;
       font-weight: bold;
       color: #c94f4f;
+      font-size: 1.2em;
+    }
+
+    .preco-destaque {
+      background: linear-gradient(45deg, #00b894, #00cec9);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      .produtos {
+        justify-content: space-around;
+      }
+      
+      .produto {
+        width: 120px;
+        margin: 8px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="overlay"></div>
   <div class="container">
-    <h1>Seja Bem-vindo à nossa Plataforma de Encomendas Online</h1>
-    <p>Preencha o formulário abaixo para fazer sua encomenda:</p>
+    <div class="category-header">
+      <div class="category-icon">🥟</div>
+      <h1>Pastéis Salgados</h1>
+      <p class="category-description">Massa crocante e dourada com recheios variados: carne, queijo, frango e camarão. Feitos na hora para garantir o sabor e a crocância perfeita!</p>
+    </div>
 
     <form id="formEncomenda" onsubmit="enviarParaWhatsapp(event)">
       <label for="nome">Nome:</label>
       <input type="text" id="nome" name="nome" required />
 
-      <label>Escolha seus produtos:</label>
+      <label>Escolha seus pastéis salgados:</label>
       <div class="produtos">
         <label class="produto">
-          <input type="checkbox" name="produto[]" value="Pastel" data-preco="1500" />
-          <img src="https://diariodonordeste.verdesmares.com.br/image/contentid/policy:1.3319443:1672692668/Massa-de-pastel.jpg?f=default&$p$f=787ad8d" alt="Pastel" />
-          <span>Pastel - 1500kz</span>
+          <input type="checkbox" name="produto[]" value="Pastel de Carne" data-preco="200" />
+          <img src="https://diariodonordeste.verdesmares.com.br/image/contentid/policy:1.3319443:1672692668/Massa-de-pastel.jpg?f=default&$p$f=787ad8d" alt="Pastel de Carne" />
+          <span>Pastel de Carne<br><span class="preco-destaque">200 Kz</span></span>
+          <div class="descricao">Carne moída temperada com cebola e especiarias</div>
         </label>
 
         <label class="produto">
-          <input type="checkbox" name="produto[]" value="Bolo" data-preco="10000" />
-          <img src="https://d1uz88p17r663j.cloudfront.net/original/8fee36bf950557ff9f896b9104f36907_bolo-vulcao-brigadeiro-receitas-nestle.jpg" alt="Bolo" />
-          <span>Bolo - 10000kz</span>
+          <input type="checkbox" name="produto[]" value="Pastel de Queijo" data-preco="180" />
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxvO6HqF8sH0mE4N9ZJ4KmX6zK7VW_oQrRwQ&s" alt="Pastel de Queijo" />
+          <span>Pastel de Queijo<br><span class="preco-destaque">180 Kz</span></span>
+          <div class="descricao">Queijo derretido em massa dourada</div>
         </label>
 
         <label class="produto">
-          <input type="checkbox" name="produto[]" value="Torta" data-preco="15000" />
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7qkxzJzJc3MGRbEnRUbGbAvwwD_Jo-ozvclk2GP7rvQ&s&ec=72940545" alt="Torta" />
-          <span>Torta - 15000kz</span>
+          <input type="checkbox" name="produto[]" value="Pastel de Frango" data-preco="220" />
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzE8H2QCJdFCVQjQoK7L5vX8x2hK3tN9zJFA&s" alt="Pastel de Frango" />
+          <span>Pastel de Frango<br><span class="preco-destaque">220 Kz</span></span>
+          <div class="descricao">Frango desfiado com temperos especiais</div>
         </label>
 
         <label class="produto">
-          <input type="checkbox" name="produto[]" value="Doces sortidos" data-preco="5000" />
-          <img src="https://www.chefpanda.pt/wp-content/uploads/2019/05/Sortido-doce-e-salgado.jpg" alt="Doces sortidos" />
-          <span>Doces sortidos - 5000kz</span>
+          <input type="checkbox" name="produto[]" value="Pastel de Camarão" data-preco="350" />
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQzFoC8qYK7BnHj5mJ3L2xN8vF4pQ9rTsGwA&s" alt="Pastel de Camarão" />
+          <span>Pastel de Camarão<br><span class="preco-destaque">350 Kz</span></span>
+          <div class="descricao">Camarão fresco com cebola roxa</div>
+        </label>
+
+        <label class="produto">
+          <input type="checkbox" name="produto[]" value="Pastel Misto" data-preco="250" />
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzH5pK8qYN2jF9L4vX6mT3hR8uQ0eW7gDxSA&s" alt="Pastel Misto" />
+          <span>Pastel Misto<br><span class="preco-destaque">250 Kz</span></span>
+          <div class="descricao">Queijo + presunto + azeitona</div>
+        </label>
+
+        <label class="produto">
+          <input type="checkbox" name="produto[]" value="Pastel de Peixe" data-preco="280" />
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyH8pK5qYN3jF2L9vX4mT6hR9uQ1eW8gDxSA&s" alt="Pastel de Peixe" />
+          <span>Pastel de Peixe<br><span class="preco-destaque">280 Kz</span></span>
+          <div class="descricao">Peixe desfiado com coentro</div>
         </label>
       </div>
 
-      <label for="quantidade">Quantidade de cada item:</label>
+      <label for="quantidade">Quantidade de cada item selecionado:</label>
       <input type="number" id="quantidade" name="quantidade" min="1" required />
 
       <label for="local">Local de entrega:</label>
       <select id="local" name="local" required>
         <option value="" disabled selected>Selecione o local</option>
-        <option value="1000">Dentro da cidade - 1000kz</option>
-        <option value="2500">Nos arredores da cidade - 2500kz</option>
-        <option value="3500">Fora da cidade - 3500kz</option>
+        <option value="1000">Dentro da cidade - 1000 Kz</option>
+        <option value="2500">Nos arredores da cidade - 2500 Kz</option>
+        <option value="3500">Fora da cidade - 3500 Kz</option>
       </select>
 
       <label for="mensagem">Mensagem adicional:</label>
-      <textarea id="mensagem" name="mensagem" rows="4" placeholder="Alguma observação especial?"></textarea>
+      <textarea id="mensagem" name="mensagem" rows="4" placeholder="Alguma observação especial sobre o preparo dos pastéis?"></textarea>
 
-      <div id="total">Total: 0kz</div>
+      <div id="total">Total: 0 Kz</div>
 
-      <button type="submit">Enviar Encomenda</button>
+      <button type="submit">🥟 Finalizar Pedido de Pastéis</button>
     </form>
   </div>
 
   <a href="https://wa.me/244923881741" class="float-btn" target="_blank">Conversar no WhatsApp</a>
-  <a href="index.html" class="float-btn-left">Voltar</a>
+  <a href="index.html" class="float-btn-left">Voltar ao Menu</a>
 
   <script>
     const form = document.getElementById('formEncomenda');
@@ -234,7 +306,7 @@
       });
 
       total += localEntrega;
-      totalDiv.textContent = `Total: ${total}kz`;
+      totalDiv.textContent = `Total: ${total} Kz`;
       return total;
     }
 
@@ -248,22 +320,24 @@
       const localTexto = localSelect.options[localSelect.selectedIndex].text;
 
       const produtosSelecionados = Array.from(document.querySelectorAll('input[name="produto[]"]:checked'))
-        .map(produto => `${produto.value} (${produto.getAttribute("data-preco")}kz)`)
+        .map(produto => `${produto.value} (${produto.getAttribute("data-preco")} Kz)`)
         .join(", ");
 
       if (!produtosSelecionados) {
-        alert("Por favor, selecione pelo menos um produto.");
+        alert("Por favor, selecione pelo menos um pastel.");
         return;
       }
 
       const total = calcularTotal();
 
-      const texto = `Olá! Sou *${nome}*. ` +
-                    `Gostaria de comprar *${quantidade}* unidade(s) de: *${produtosSelecionados}*. ` +
-                    `Local de entrega: *${localTexto}*. ` +
-                    (mensagem ? `Observação: _${mensagem}_` : `Sem observações adicionais.`) + `\n` +
-                    `*Total: ${total}kz* \n` +
-                    `*Pedido feito via Plataforma da Pastelaria Doce Sabor*`;
+      const texto = `🥟 *PEDIDO DE PASTÉIS SALGADOS*\n\n` +
+                    `👤 Cliente: *${nome}*\n` +
+                    `📦 Quantidade: *${quantidade}* unidade(s) de cada\n` +
+                    `🥟 Pastéis: *${produtosSelecionados}*\n` +
+                    `📍 Entrega: *${localTexto}*\n` +
+                    (mensagem ? `📝 Observação: _${mensagem}_\n` : '') +
+                    `\n💰 *TOTAL: ${total} Kz*\n\n` +
+                    `_Pedido feito via Plataforma da Pastelaria Doce Sabor_`;
 
       const numeroWhatsApp = "244923881741";
       const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURI(texto)}`;
