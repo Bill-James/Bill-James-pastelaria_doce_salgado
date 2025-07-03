@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brownies & Doces - Pastelaria Doce Sabor</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url('https://images.unsplash.com/photo-1606313564200-e75d5e30476c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(139, 69, 19, 0.7);
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 30px;
+      color: #fff;
+    }
+
+    h1 {
+      color: #f4e4c1;
+      font-family: 'Pacifico', cursive;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    .category-header {
+      background: rgba(210, 180, 140, 0.15);
+      padding: 25px;
+      border-radius: 20px;
+      margin-bottom: 25px;
+      border: 1px solid rgba(244, 228, 193, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .category-icon {
+      font-size: 4em;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+    }
+
+    .category-description {
+      font-size: 1.2em;
+      color: #f0f0f0;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    form {
+      background-color: rgba(244, 228, 193, 0.95);
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      color: #333;
+      backdrop-filter: blur(5px);
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      text-align: left;
+      color: #5d4e37;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      border-radius: 8px;
+      border: 2px solid #ddd;
+      box-sizing: border-box;
+      font-size: 14px;
+      transition: border-color 0.3s;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #8b4513;
+      outline: none;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 15px;
+      background: linear-gradient(45deg, #8b4513, #654321);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+      font-weight: bold;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+
+    .produtos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      margin-top: 25px;
+    }
+
+    .produto {
+      position: relative;
+      cursor: pointer;
+      text-align: center;
+      background: rgba(244, 228, 193, 0.15);
+      border-radius: 15px;
+      padding: 15px;
+      transition: all 0.3s;
+      border: 2px solid rgba(244, 228, 193, 0.2);
+    }
+
+    .produto:hover {
+      transform: translateY(-5px);
+      background: rgba(244, 228, 193, 0.25);
+      border-color: rgba(244, 228, 193, 0.4);
+    }
+
+    .produto input[type="checkbox"] {
+      display: none;
+    }
+
+    .produto img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 3px solid transparent;
+      transition: all 0.3s;
+    }
+
+    .produto span {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+      font-size: 15px;
+      color: #5d4e37;
+      line-height: 1.4;
+    }
+
+    .produto .descricao {
+      font-size: 12px;
+      color: #8b4513;
+      font-weight: normal;
+      margin-top: 8px;
+      line-height: 1.3;
+    }
+
+    .produto input[type="checkbox"]:checked + img {
+      border: 3px solid #8b4513;
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(139, 69, 19, 0.4);
+    }
+
+    .produto input[type="checkbox"]:checked ~ span {
+      color: #8b4513;
+    }
+
+    .float-btn,
+    .float-btn-left {
+      position: fixed;
+      bottom: 20px;
+      padding: 12px 18px;
+      border-radius: 25px;
+      font-size: 14px;
+      font-weight: bold;
+      text-decoration: none;
+      color: white;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      z-index: 3;
+      transition: transform 0.2s;
+    }
+
+    .float-btn:hover,
+    .float-btn-left:hover {
+      transform: translateY(-2px);
+    }
+
+    .float-btn {
+      right: 20px;
+      background: linear-gradient(45deg, #25d366, #20ba5a);
+    }
+
+    .float-btn-left {
+      left: 20px;
+      background: linear-gradient(45deg, #6c757d, #5a6268);
+    }
+
+    #total {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #8b4513;
+      font-size: 1.4em;
+      text-align: center;
+      padding: 10px;
+      background: rgba(139, 69, 19, 0.1);
+      border-radius: 8px;
+    }
+
+    .preco-destaque {
+      background: linear-gradient(45deg, #8b4513, #654321);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 15px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-top: 5px;
+      display: inline-block;
+    }
+
+    .sabor-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .sabor-option {
+      background: rgba(244, 228, 193, 0.8);
+      padding: 6px;
+      border-radius: 8px;
+      font-size: 11px;
+      color: #5d4e37;
+      font-weight: 500;
+    }
+
+    .quantidade-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+      background: rgba(244, 228, 193, 0.8);
+      padding: 8px;
+      border-radius: 8px;
+    }
+
+    .quantidade-btn {
+      background: #8b4513;
+      color: white;
+      border: none;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s;
+    }
+
+    .quantidade-btn:hover {
+      background: #654321;
+      transform: scale(1.1);
+    }
+
+    .quantidade-input {
+      width: 40px;
+      text-align: center;
+      border: 1px solid #8b4513;
+      border-radius: 4px;
+      padding: 4px;
+      margin: 0;
+    }
+
+    .embalagem-options {
+      margin-top: 15px;
+    }
+
+    .embalagem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .embalagem-option {
+      background: rgba(244, 228, 193, 0.9);
+      padding: 12px;
+      border-radius: 8px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .embalagem-option:hover {
+      border-color: #8b4513;
+    }
+
+    .embalagem-option input[type="radio"] {
+      display: none;
+    }
+
+    .embalagem-option input[type="radio"]:checked + .embalagem-content {
+      border-color: #8b4513;
+      background: rgba(139, 69, 19, 0.1);
+    }
+
+    .embalagem-content {
+      border: 2px solid transparent;
+      border-radius: 6px;
+      padding: 8px;
+      transition: all 0.3s;
+    }
+
+    @media (max-width: 768px) {
+      .produtos {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+      }
+      
+      .container {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 2em;
+      }
+
+      .embalagem-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="category-header">
+      <div class="category-icon">🍫</div>
+      <h1>Brownies & Doces</h1>
+      <p class="category-description">Irresistíveis brownies artesanais e doces especiais feitos com chocolate premium e ingredientes selecionados. Perfeitos para presentear ou adoçar seu dia com sabores intensos e texturas únicas!</p>
+    </div>
+
+    <form id="formEncomenda" onsubmit="enviarParaWhatsapp(event)">
+      <label for="nome">Nome Completo:</label>
+      <input type="text" id="nome" name="nome" required />
+
+      <label for="telefone">Telefone:</label>
+      <input type="text" id="telefone" name="telefone" required />
+
+      <label>Escolha seus brownies e doces:</label>
+      <div class="produtos">
+        <label class="produto">
+          <input type="checkbox" name="produto[]" value="Brownie Tradicional" data-preco="800" />
+          <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Brownie Tradicional" />
+          <span>Brownie Tradicional<br><span class="preco-destaque">800 Kz/un</span></span>
+          <div class="descricao">Clássico brownie de chocolate, fudgy e intenso</div>
+          <div class="quantidade-container">
+            <button type="button" class="quantidade-btn" onclick="alterarQuantidade(this, -1)">-</button>
+            <input type="number" class="quantidade-input" value="1" min="1" max="50" onchange="calcularTotal()">
+            <button type="button" class="quantidade-btn" onclick="alterarQuantidade(this, 1)">+</button>
+          </div>
+        </label>
+
+        <label class="produto">
+          <input type="checkbox" name="produto[]" value="Brownie com Nozes" data-preco="900" />
+          <img src="https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Brownie com Nozes" />
+          <span>Brownie com Nozes<br><span class="preco-destaque">900 Kz/un</span></span>
+          <div class="descricao">Brownie rico com pedaços de nozes crocantes</div>
+          <div class="quantidade-container">
+            <button type="button" class="quantidade-btn" onclick="alterarQuantidade(this, -1)">-</button>
+            <input type="number" class="quantidade-input" value="1" min="1" max="50" onchange="calcularTotal()">
+            <button type="button" class="quantidade-btn" onclick="alterarQuantidade(this, 1)">+</button>
+          </div>
+        </label>
+
+        <label class="produto">
+          <input type="checkbox" name="produto[]" value="Brownie Duplo Chocolate" data-preco="950" />
+          <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Brownie Duplo Chocolate" />
+          <span>Brownie Duplo Chocolate<br><span class="preco-destaque">950 Kz/un</span></span>
+          <div class="descricao">Extra chocolate com gotas de chocolate belga</div>
+          <div class="quantidade-container">
+            <button type="button" class="quantidade-btn" onclick="alterarQuantidade(this, -1)">-</button>
+            <input type="number" class="quantidade-input" value="1" min="1" max="50" onchange="calcularTotal()">
+            <button type="button" class="quantidade-btn" onclick="alterarQuantidade(this, 1)">+</button>
+          </div>
+        </label>
+
+        <label class="produto">
+          <input type="checkbox" name="produto[]" value="Brownie Red Velvet" data-preco="1000" />
+          <img src="https://images.unsplash.com/photo-1571115764595-644a1f56a55c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Brownie Red Velvet" />
+          <span>Brownie Red Velvet<br><span class="preco-destaque">1.000 Kz/un</span></span>
+          <div class="descricao">Brownie aveludado com cream cheese</div>
+          <div class="quantidade-container">
+            <button type="button" class="quantidade-btn" onclick="alterarQuantidade(this, -1)">-</button>
+            <input type="number" class="quantidade-input" value="1" min="1" max="50" onchange="calcularTotal()">
+            <button type="button" class="quantidade-btn" onclick="alterarQuantidade(this, 1)">+</button>
+          </div>
+        </label>
+
+        <label class="produto">
+          <input type="checkbox" name="produto[]" value="Brigadeiro Gourmet" data-preco="150" />
+          <img src="https://images.unsplash.com/photo-1559656914-a30970c1affd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Brigadeiro Gourmet" />
+          <span>Brigadeiro Gourmet<br><span class="preco-destaque">150 Kz/un</span></span>
+          <div class="descricao">Brigadeiros artesanais com chocolate premium</div>
+          <div class="sabor-options">
+            <div class="sabor-option">Tradicional</div>
+            <div class="sabor-option">Pistache</div>
+            <div class="sabor-option">Café</div>
+            <div class="sabor-option">Coco</div>
+          </div>
+          <div class="quantidade-container">
+            <button type="button" class="quantidade-btn" onclick="alterarQuantidade(this, -1)">-</button>
+            <input type="number" class="quantidade-input" value="6" min="6" max="100" step="6" onchange="calcularTotal()">
+            <button type="button" class="quantidade-btn" onclick="alterarQuantidade(this, 6)">+</button>
+          </div>
+        </label>
+
+        <label class="produto">
+          <input type="checkbox" name="produto[]" value="Beijinho Gourmet" data-preco="150" />
+          <img src="https://images.unsplash.com/photo-1587668178277-295251f900ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Beijinho Gourmet" />
+          <span>Beijinho Gourmet<br><span class="preco-destaque">150 Kz/un</span></span>
+          <div class="descricao">Beijinhos cremosos com coco fresco</div>
+          <div class="sabor-options">
+            <div class="sabor-option">Tradicional</div>
+            <div class="sabor-option">Maracujá</div>
+            <div class="sabor-option">Limão</div>
+          </div>
+          <div class="quantidade-container">
+            <button type="button" class="quantidade-btn" onclick="alterarQuantidade(this, -1)">-</button>
+            <input type="number" class="quantidade-input" value="6" min="6" max="100" step="6" onchange="calcularTotal()">
+            <button type="button" class="quantidade-btn" onclick="alterarQuantidade(this, 6)">+</button>
+          </div>
+        </label>
+
+        <label class="produto">
+          <input type="checkbox" name="produto[]" value="Trufa de Chocolate" data-preco="200" />
+          <img src="https://images.unsplash.com/photo-1549007994-cb92caebd54b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Trufa de Chocolate" />
+          <span>Trufa de Chocolate<br><span class="preco-destaque">200 Kz/un</span></span>
+          <div class="descricao">Trufas cremosas com ganache belga</div>
+          <div class="sabor-options">
+            <div class="sabor-option">Meio Amargo</div>
+            <div class="sabor-option">Rum</div>
+            <div class="sabor-option">Avelã</div>
+          </div>
+          <div class="quantidade-container">
+            <button type="button" class="quantidade-btn" onclick="alterarQuantidade(this, -1)">-</button>
+            <input type="number" class="quantidade-input" value="6" min="6" max="100" step="6" onchange="calcularTotal()">
+            <button type="button" class="quantidade-btn" onclick="alterarQuantidade(this, 6)">+</button>
+          </div>
+        </label>
+
+        <label class="produto">
+          <input type="checkbox" name="produto[]" value="Cookies Artesanais" data-preco="300" />
+          <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Cookies Artesanais" />
+          <span>Cookies Artesanais<br><span class="preco-destaque">300 Kz/un</span></span>
+          <div class="descricao">Cookies crocantes por fora, macios por dentro</div>
+          <div class="sabor-options">
+            <div class="sabor-option">Gotas Chocolate</div>
+            <div class="sabor-option">Aveia e Passa</div>
+            <div class="sabor-option">Amendoim</div>
+          </div>
+          <div class="quantidade-container">
+            <button type="button" class="quantidade-btn" onclick="alterarQuantidade(this, -1)">-</button>
+            <input type="number" class="quantidade-input" value="1" min="1" max="50" onchange="calcularTotal()">
+            <button type="button" class="quantidade-btn" onclick="alterarQuantidade(this, 1)">+</button>
+          </div>
+        </label>
+      </div>
+
+      <div class="embalagem-options">
+        <label for="embalagem">Tipo de Embalagem:</label>
+        <div class="embalagem-grid">
+          <label class="embalagem-option">
+            <input type="radio" name="embalagem" value="Simples" data-preco="0" required />
+            <div class="embalagem-content">
+              <strong>Embalagem Simples - Grátis</strong><br>
+              <small>Saco plástico transparente com fita</small>
+            </div>
+          </label>
+          <label class="embalagem-option">
+            <input type="radio" name="embalagem" value="Premium" data-preco="500" />
+            <div class="embalagem-content">
+              <strong>Embalagem Premium - 500 Kz</strong><br>
+              <small>Caixa decorativa com laço e cartão</small>
+            </div>
+          </label>
+          <label class="embalagem-option">
+            <input type="radio" name="embalagem" value="Presente" data-preco="800" />
+            <div class="embalagem-content">
+              <strong>Embalagem Presente - 800 Kz</strong><br>
+              <small>Cesta de vime com papel celofane e fita</small>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <label for="data_entrega">Data da Entrega:</label>
+      <input type="date" id="data_entrega" name="data_entrega" required />
+
+      <label for="local">Local de entrega:</label>
+      <select id="local" name="local" required>
+        <option value="" disabled selected>Selecione o local</option>
+        <option value="800">Dentro da cidade - 800 Kz</option>
+        <option value="1500">Nos arredores da cidade - 1.500 Kz</option>
+        <option value="2500">Fora da cidade - 2.500 Kz</option>
+        <option value="0">Retirada na loja - Grátis</option>
+      </select>
+
+      <label for="sabores_especificos">Sabores Específicos (para docinhos):</label>
+      <textarea id="sabores_especificos" name="sabores_especificos" rows="3" placeholder="Ex: 12 brigadeiros tradicionais, 6 de pistache, 6 beijinhos de maracujá..."></textarea>
+
+      <label for="observacoes">Observações Especiais:</label>
+      <textarea id="observacoes" name="observacoes" rows="4" placeholder="Alergias, preferências especiais, horário de entrega, etc."></textarea>
+
+      <div id="total">Total: 0 Kz</div>
+
+      <button type="submit">🍫 Finalizar Pedido de Brownies & Doces</button>
+    </form>
+  </div>
+
+  <a href="https://wa.me/244923881741" class="float-btn" target="_blank">💬 WhatsApp</a>
+  <a href="index.html" class="float-btn-left">🏠 Menu Principal</a>
+
+  <script>
+    const form = document.getElementById('formEncomenda');
+    const totalDiv = document.getElementById('total');
+
+    // Define data mínima como hoje (para doces não precisa tanto tempo)
+    const hoje = new Date();
+    document.getElementById('data_entrega').min = hoje.toISOString().split('T')[0];
+
+    form.addEventListener('change', () => {
+      calcularTotal();
+    });
+
+    function alterarQuantidade(btn, valor) {
+      const container = btn.parentElement;
+      const input = container.querySelector('.quantidade-input');
+      const produto = container.closest('.produto');
+      const checkbox = produto.querySelector('input[type="checkbox"]');
+      
+      let novaQuantidade = parseInt(input.value) + valor;
+      
+      // Validar limites
+      const min = parseInt(input.min);
+      const max = parseInt(input.max);
+      
+      if (novaQuantidade < min) novaQuantidade = min;
+      if (novaQuantidade > max) novaQuantidade = max;
+      
+      input.value = novaQuantidade;
+      
+      // Marcar checkbox automaticamente se quantidade > 0
+      if (novaQuantidade > 0) {
+        checkbox.checked = true;
+      }
+      
+      calcularTotal();
+    }
+
+    function calcularTotal() {
+      const localEntrega = parseInt(document.querySelector('input[name="local"]:checked')?.value || document.getElementById("local").value) || 0;
+      const embalagem = parseInt(document.querySelector('input[name="embalagem"]:checked')?.getAttribute("data-preco")) || 0;
+      let subtotal = 0;
+
+      document.querySelectorAll('input[name="produto[]"]:checked').forEach(el => {
+        const produto = el.closest('.produto');
+        const preco = parseInt(el.getAttribute("data-preco"));
+        const quantidade = parseInt(produto.querySelector('.quantidade-input').value) || 1;
+        subtotal += preco * quantidade;
+      });
+
+      const total = subtotal + localEntrega + embalagem;
+      
+      totalDiv.textContent = `Total: ${total.toLocaleString()} Kz`;
+      return total;
+    }
+
+    function enviarParaWhatsapp(event) {
+      event.preventDefault();
+
+      const nome = document.getElementById("nome").value.trim();
+      const telefone = document.getElementById("telefone").value.trim();
+      const dataEntrega = document.getElementById("data_entrega").value;
+      const saboresEspecificos = document.getElementById("sabores_especificos").value.trim();
+      const observacoes = document.getElementById("observacoes").value.trim();
+      
+      const localSelect = document.getElementById("local");
+      const localTexto = localSelect.options[localSelect.selectedIndex].text;
+
+      const embalagemSelecionada = document.querySelector('input[name="embalagem"]:checked');
+      const embalagemTexto = embalagemSelecionada ? embalagemSelecionada.value : 'Não selecionada';
+
+      const produtosSelecionados = Array.from(document.querySelectorAll('input[name="produto[]"]:checked'))
+        .map(produto => {
+          const produtoDiv = produto.closest('.produto');
+          const quantidade = produtoDiv.querySelector('.quantidade-input').value;
+          const preco = produto.getAttribute("data-preco");
+          const total = parseInt(preco) * parseInt(quantidade);
+          return `${quantidade}x ${produto.value} (${preco} Kz cada = ${total.toLocaleString()} Kz)`;
+        })
+        .join("\n");
+
+      if (!produtosSelecionados) {
+        alert("Por favor, selecione pelo menos um brownie ou doce.");
+        return;
+      }
+
+      const total = calcularTotal();
+
+      // Formatar data para português
+      const dataFormatada = new Date(dataEntrega + 'T00:00:00').toLocaleDateString('pt-PT', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+
+      const texto = `🍫 *PEDIDO DE BROWNIES & DOCES*\n\n` +
+                    `👤 Cliente: *${nome}*\n` +
+                    `📞 Telefone: *${telefone}*\n` +
+                    `🍫 Produtos:\n${produtosSelecionados}\n` +
+                    `📦 Embalagem: *${embalagemTexto}*\n` +
+                    `📅 Data de Entrega: *${dataFormatada}*\n` +
+                    `📍 Local: *${localTexto}*\n` +
+                    (saboresEspecificos ? `🎯 Sabores Específicos: _${saboresEspecificos}_\n` : '') +
+                    (observacoes ? `📝 Observações: _${observacoes}_\n` : '') +
+                    `\n💰 *TOTAL: ${total.toLocaleString()} Kz*\n\n` +
+                    `_🍫 Brownies e doces fresquinhos preparados no dia da entrega_\n` +
+                    `_Pedido feito via Plataforma da Pastelaria
